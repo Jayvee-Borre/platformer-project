@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dlmrjrfue881n"]
 
-[ext_resource type="Script" uid="uid://h668k6w0abs4" path="res://Scenes/player.gd" id="1_tx1dd"]
+[ext_resource type="Script" uid="uid://h668k6w0abs4" path="res://Scripts/Player/player.gd" id="1_tx1dd"]
 [ext_resource type="Texture2D" uid="uid://d0462ystlwlsm" path="res://Assets/gothicvania/Characters/Terrible Knight/Spritesheets/player-Sword Slash.png" id="2_3smsa"]
 [ext_resource type="Texture2D" uid="uid://bn6hdyx4o1fuu" path="res://Assets/gothicvania/Characters/Terrible Knight/Spritesheets/player-Idle.png" id="3_8erm5"]
 [ext_resource type="Texture2D" uid="uid://bmpecvhx0hqxa" path="res://Assets/gothicvania/Characters/Terrible Knight/Spritesheets/player-Jump.png" id="4_f1ek2"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://cg8p7mg0juujt" path="res://Assets/gothicvania/Characters/Terrible Knight/Spritesheets/player-Run.png" id="6_gymyn"]
 [ext_resource type="Script" uid="uid://cqn74w311a3ce" path="res://Scripts/Player/States/p_idle_state.gd" id="8_8erm5"]
 [ext_resource type="Script" uid="uid://wl5hjph263ia" path="res://Scripts/Player/States/p_walking_state.gd" id="9_f1ek2"]
+[ext_resource type="Script" uid="uid://bpbnr2xxwdljp" path="res://Scripts/Player/States/p_fall_state.gd" id="10_tx1dd"]
+[ext_resource type="Script" uid="uid://dkgtajtutb84m" path="res://Scripts/Player/States/p_jump_state.gd" id="11_gymyn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
 atlas = ExtResource("2_3smsa")
@@ -243,8 +245,8 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_31cv2")
 }],
-"loop": 1,
-"name": &"running",
+"loop": 0,
+"name": &"run",
 "speed": 10.0
 }]
 
@@ -261,7 +263,7 @@ script = ExtResource("1_tx1dd")
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1274452156]
 position = Vector2(3, -51)
 sprite_frames = SubResource("SpriteFrames_l5osg")
-animation = &"attack"
+animation = &"run"
 autoplay = "idle"
 
 [node name="player_hitbox" type="CollisionShape2D" parent="." unique_id=1606385538]
@@ -289,4 +291,10 @@ metadata/_custom_type_script = "uid://cqn74w311a3ce"
 script = ExtResource("9_f1ek2")
 metadata/_custom_type_script = "uid://wl5hjph263ia"
 
-[connection signal="animation_finished" from="sprite" to="." method="_on_sprite_animation_finished"]
+[node name="PlayerJumpState" type="Node" parent="StateMachine" unique_id=852375654]
+script = ExtResource("11_gymyn")
+metadata/_custom_type_script = "uid://dkgtajtutb84m"
+
+[node name="PlayerFallState" type="Node" parent="StateMachine" unique_id=1340357958]
+script = ExtResource("10_tx1dd")
+metadata/_custom_type_script = "uid://bpbnr2xxwdljp"

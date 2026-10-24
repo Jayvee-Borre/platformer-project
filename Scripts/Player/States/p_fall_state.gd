@@ -1,12 +1,18 @@
 class_name PlayerFallState
 extends PlayerState
 
+func physics_update(delta : float) -> void:
+    var character = state_machine.get_parent()
+    var direction = Input.get_axis("move_left", "move_right")
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
+    if character.is_on_floor():
+        if direction == 0:
+            state_machine.change_state("playeridlestate")
+        else:
+            state_machine.change_state("playerwalkstate")
+        return
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+    character.velocity += character.get_gravity() * delta
+    character.velocity.x = direction * movement_speed
+    character.move_and_slide()
