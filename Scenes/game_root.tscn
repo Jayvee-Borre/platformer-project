@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://df3ow27hcnewx"]
+
+[ext_resource type="PackedScene" uid="uid://dlmrjrfue881n" path="res://Scenes/player.tscn" id="1_02ly6"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_l5osg"]
+
+[sub_resource type="TileSet" id="TileSet_l5osg"]
+
+[node name="gameRoot" type="Node2D" unique_id=636231356]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1006116709]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=686968059]
+position = Vector2(0, 5)
+shape = SubResource("WorldBoundaryShape2D_l5osg")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1095718645]
+tile_set = SubResource("TileSet_l5osg")
+
+[node name="player" parent="." unique_id=814420492 instance=ExtResource("1_02ly6")]
+position = Vector2(-1, -43)
+
+[node name="Camera2D" type="Camera2D" parent="player" unique_id=1553882089]
+zoom = Vector2(2, 2)
+process_callback = 0
+limit_enabled = false
