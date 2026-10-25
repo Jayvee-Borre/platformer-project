@@ -2,8 +2,9 @@ class_name PlayerJumpState
 extends PlayerState
 
 func enter() -> void:
-	super()
 	var character = state_machine.get_parent()
+	var sprite = getSprite()
+	sprite.play("jump")
 	character.velocity.y = jump_vel
 
 func physics_update(delta : float) -> void:

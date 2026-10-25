@@ -5,9 +5,13 @@ extends CharacterBody2D
 var sprite = $sprite
 
 func _physics_process(delta: float) -> void:
-	var direction = Input.get_axis("move_left", "move_right")
-
-	if not is_on_floor():
+	if velocity.x > 0:
+		sprite.flip_h = false
+	elif velocity.x < 0:
+		sprite.flip_h = true
+		
+"""
+if not is_on_floor():
 		if sprite.animation != "jump":
 			print("Jump is active")
 			sprite.play("jump")
@@ -16,8 +20,4 @@ func _physics_process(delta: float) -> void:
 			sprite.play("idle")
 		else:
 			sprite.play("run")
-
-	if velocity.x > 0:
-		sprite.flip_h = false
-	elif velocity.x < 0:
-		sprite.flip_h = true
+"""
